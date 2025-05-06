@@ -8,10 +8,9 @@
   - Medication and prescription handling
   - Staff and user management
 - **Question 2**: Task Manager REST API
-  - Full CRUD operations
-  - User authentication and authorization
-  - Task management features
+  - Full CRUD operations for tasks and users
   - MySQL database integration
+  - RESTful API endpoints
 
 ## Setup Instructions
 
@@ -24,15 +23,14 @@
 ### Installation
 1. Clone the repository:
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/WayneChibeu/Week-8-Database-Assignment.git
 cd "Week 8 Database assignment project"
 ```
 
 2. Set up Question 1 - Clinic Booking System:
 ```bash
-cd Question1_ClinicBooking
-mysql -u root -p < schema.sql
-mysql -u root -p < sample_data.sql
+cd Question1_ClinicBookingSystem
+mysql -u root -p < clinic_booking_system.sql
 ```
 
 3. Set up Question 2 - Task Manager API:
@@ -47,11 +45,14 @@ copy .env.example .env
 ```
 Update `.env` with your credentials:
 ```plaintext
+# Database Configuration
 DB_HOST=localhost
-DB_USER=your_username
+DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=task_manager
-JWT_SECRET=your_secret_key
+
+# Server Configuration
+PORT=3000
 ```
 
 ### Running the Applications
@@ -70,27 +71,7 @@ Server runs at: http://localhost:3000
 
 ## API Documentation
 
-### Authentication Endpoints
-- `POST /api/auth/register` - Register new user
-  ```json
-  {
-    "username": "string",
-    "email": "string",
-    "password": "string"
-  }
-  ```
-- `POST /api/auth/login` - User login
-  ```json
-  {
-    "email": "string",
-    "password": "string"
-  }
-  ```
-
 ### Tasks Endpoints
-All task endpoints require JWT Authentication header:
-`Authorization: Bearer <token>`
-
 - `GET /api/tasks` - Get all tasks
 - `GET /api/tasks/:id` - Get specific task
 - `POST /api/tasks` - Create task
@@ -98,17 +79,22 @@ All task endpoints require JWT Authentication header:
   {
     "title": "string",
     "description": "string",
-    "due_date": "YYYY-MM-DD"
+    "user_id": "number"
   }
   ```
 - `PUT /api/tasks/:id` - Update task
 - `DELETE /api/tasks/:id` - Delete task
 
 ### Users Endpoints
-Requires admin authorization:
-
-- `GET /api/users` - List users
+- `GET /api/users` - List all users
 - `GET /api/users/:id` - Get user details
+- `POST /api/users` - Create user
+  ```json
+  {
+    "name": "string",
+    "email": "string"
+  }
+  ```
 - `PUT /api/users/:id` - Update user
 - `DELETE /api/users/:id` - Delete user
 
@@ -117,8 +103,6 @@ API returns standard HTTP status codes:
 - 200: Success
 - 201: Created
 - 400: Bad Request
-- 401: Unauthorized
-- 403: Forbidden
 - 404: Not Found
 - 500: Server Error
 
@@ -289,11 +273,6 @@ npm test
 ## Security Features
 - SQL injection prevention (using mysql2 prepared statements)
 - Cross-Origin Resource Sharing (CORS) protection
-- Password hashing using bcrypt
-- JWT authentication
-- Environment variable protection
-- XSS protection
-- Rate limiting
 
 ## Technologies Used
 - Node.js v14+

@@ -22,5 +22,5 @@ build/
 
 # Database
 *.sql
-!schema.sql
-!sample_data.sql
+!clinic_booking_system.sql
+!task_manager_schema.sql

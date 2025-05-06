@@ -20,7 +20,17 @@ npm install
 ```bash
 cp .env.example .env
 ```
-Update `.env` with your database credentials.
+Update `.env` with your database credentials:
+```plaintext
+# Database Configuration
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=task_manager
+
+# Server Configuration
+PORT=3000
+```
 
 4. Create the MySQL database:
 ```bash
@@ -35,27 +45,7 @@ Server runs at: http://localhost:3000
 
 ## API Routes
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-```json
-{
-    "name": "string",
-    "email": "string",
-    "password": "string"
-}
-```
-- `POST /api/auth/login` - User login
-```json
-{
-    "email": "string",
-    "password": "string"
-}
-```
-
 ### Tasks
-All task endpoints require JWT Authentication header:
-`Authorization: Bearer <token>`
-
 - `GET /api/tasks` - Get all tasks
 - `GET /api/tasks/:id` - Get specific task
 - `POST /api/tasks` - Create task
@@ -72,6 +62,13 @@ All task endpoints require JWT Authentication header:
 ### Users
 - `GET /api/users` - Get all users
 - `GET /api/users/:id` - Get user details
+- `POST /api/users` - Create user
+```json
+{
+    "name": "string",
+    "email": "string"
+}
+```
 - `PUT /api/users/:id` - Update user
 - `DELETE /api/users/:id` - Delete user
 
@@ -79,22 +76,15 @@ All task endpoints require JWT Authentication header:
 - 200: Success
 - 201: Created
 - 400: Bad Request
-- 401: Unauthorized
-- 403: Forbidden
 - 404: Not Found
 - 500: Server Error
 
 ## Technologies Used
-- Express.js
-- MySQL
-- JSON Web Tokens
-- bcrypt
-- dotenv
+- Express.js 4.18+
+- MySQL 8.0+
+- body-parser
 - cors
-- helmet
 
-## Testing
-Run tests:
-```bash
-npm test
-```
+## Security Features
+- SQL injection prevention (using mysql2 prepared statements)
+- Cross-Origin Resource Sharing (CORS) protection

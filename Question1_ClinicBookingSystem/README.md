@@ -24,8 +24,7 @@ mysql -u root -p
 ```
 4. Create and populate the database:
 ```bash
-source c:/Users/Wayne/OneDrive/Desktop/Week 8 Database assignment project/Question1_ClinicBookingSystem/schema.sql
-source c:/Users/Wayne/OneDrive/Desktop/Week 8 Database assignment project/Question1_ClinicBookingSystem/sample_data.sql
+source c:/Users/Wayne/OneDrive/Desktop/Week 8 Database assignment project/Question1_ClinicBookingSystem/clinic_booking_system.sql
 ```
 
 ## Table Structure
